@@ -7,7 +7,7 @@ const DEFAULT_TRUCK = {
   producedYear: '2018',
   capacity: '12000',
   averageSpeed: '110',
-  typeOfGas: 'Diesel'
+  typeOfGas: 'Diesel',
 };
 
 export default class Truck extends Transport {
@@ -18,16 +18,14 @@ export default class Truck extends Transport {
     capacity = DEFAULT_TRUCK.capacity,
     averageSpeed = DEFAULT_TRUCK.averageSpeed,
     licensePlate = DEFAULT_TRUCK.averageSpeed,
-    typeOfGas = DEFAULT_TRUCK.typeOfGas
-    ) {
-    super(id, model ,producedYear, capacity, averageSpeed)
+    typeOfGas = DEFAULT_TRUCK.typeOfGas,
+  ) {
+    super(id, model, producedYear, capacity, averageSpeed);
     this._licensePlate = licensePlate;
     this._typeOfGas = typeOfGas;
   }
 
   showAverageSpeed() {
-    return `${this._averageSpeed} km`
+    return `${this._averageSpeed} km`;
   }
-
 }
-

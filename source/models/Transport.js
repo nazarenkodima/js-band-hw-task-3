@@ -1,4 +1,3 @@
-
 export default class Transport {
   constructor(id, model, producedYear, capacity, averageSpeed) {
     this._id = id;
@@ -12,10 +11,6 @@ export default class Transport {
     const pound = 2.2046226218;
     const capacityInPounds = this._capacity * pound;
 
-    return `${capacityInPounds.toFixed()}lbs`
+    return `${capacityInPounds.toFixed()}lbs`;
   }
-
-
 }
-
-

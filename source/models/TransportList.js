@@ -1,12 +1,11 @@
-import TransportFactory from "./TransportFactory/TransportFactory.js";
-import LocalStorageService from "../services/LocalStorageService.js";
+import TransportFactory from './TransportFactory/TransportFactory.js';
+import LocalStorageService from '../services/LocalStorageService.js';
 
 const localStorageService = LocalStorageService.getInstance();
 const TRANSPORT_TOKEN = 'Transport';
 
 export default class TransportList {
   constructor() {
-
     this.transportList = document.querySelector('.transport-list');
 
     const addTruckButton = document.getElementById('add-truck');
@@ -15,7 +14,7 @@ export default class TransportList {
     addTruckButton.addEventListener('click', this.addTruck.bind(this));
     addShipButton.addEventListener('click', this.addShip.bind(this));
 
-    this.render()
+    this.render();
   }
 
   addShip() {
@@ -31,20 +30,31 @@ export default class TransportList {
     let ship;
 
     shipInputs.forEach(input => {
-      !input.value.trim() ?
-        ship = TransportFactory.createTransport('ship' ) :
-        ship = TransportFactory.createTransport('ship', id, model, name, producedYear, capacity, averageSpeed, countOfTeam)
+      !input.value.trim()
+        ? (ship = TransportFactory.createTransport('ship'))
+        : (ship = TransportFactory.createTransport(
+            'ship',
+            id,
+            model,
+            name,
+            producedYear,
+            capacity,
+            averageSpeed,
+            countOfTeam,
+          ));
     });
-  
-    console.log(`Average speed: ${ship.showAverageSpeed()}`)
-    console.log(`Capacity in pounds: ${ship.showCapacityInPounds()}`)
-  
-    shipInputs.forEach(input => { 
+
+    console.log(`Average speed: ${ship.showAverageSpeed()}`);
+    console.log(`Capacity in pounds: ${ship.showCapacityInPounds()}`);
+
+    shipInputs.forEach(input => {
       input.value = '';
     });
-  
+
     const li = document.createElement('li');
-    li.insertAdjacentHTML('afterbegin', `
+    li.insertAdjacentHTML(
+      'afterbegin',
+      `
       <span>ID:</span> ${ship._id}
       <span>Model: </span>${ship._model}
       <span>Type:</span> ${ship._name}
@@ -52,14 +62,14 @@ export default class TransportList {
       <span>Capacity:</span> ${ship._capacity}kg
       <span>Average speed:</span> ${ship._averageSpeed}km
       <span>Count of Team:</span> ${ship._countOfTeam}
-    `);
-  
-    this.transportList.appendChild(li)
+    `,
+    );
+
+    this.transportList.appendChild(li);
 
     const transportList = this.transportList.innerHTML;
 
-    localStorageService.saveToken(TRANSPORT_TOKEN, transportList)
-
+    localStorageService.saveToken(TRANSPORT_TOKEN, transportList);
   }
 
   addTruck() {
@@ -74,21 +84,32 @@ export default class TransportList {
 
     let truck;
 
-    truckInputs.forEach(input => { 
-      !input.value.trim() ?
-        truck = TransportFactory.createTransport('truck') :
-        truck = TransportFactory.createTransport('truck', id, model, producedYear, capacity, averageSpeed, licensePlate, typeOfGas)
+    truckInputs.forEach(input => {
+      !input.value.trim()
+        ? (truck = TransportFactory.createTransport('truck'))
+        : (truck = TransportFactory.createTransport(
+            'truck',
+            id,
+            model,
+            producedYear,
+            capacity,
+            averageSpeed,
+            licensePlate,
+            typeOfGas,
+          ));
     });
 
-    console.log(`Average speed: ${truck.showAverageSpeed()}`)
-    console.log(`Capacity in pounds: ${truck.showCapacityInPounds()}`)
-  
-    truckInputs.forEach(input => { 
+    console.log(`Average speed: ${truck.showAverageSpeed()}`);
+    console.log(`Capacity in pounds: ${truck.showCapacityInPounds()}`);
+
+    truckInputs.forEach(input => {
       input.value = '';
-    })
-  
+    });
+
     const li = document.createElement('li');
-    li.insertAdjacentHTML('afterbegin', `
+    li.insertAdjacentHTML(
+      'afterbegin',
+      `
       <span>ID:</span> ${truck._id}
       <span>Model:</span> ${truck._model}
       <span>Produced year:</span> ${truck._producedYear}
@@ -96,27 +117,25 @@ export default class TransportList {
       <span>Average speed:</span> ${truck._averageSpeed}km
       <span>License plate:</span> ${truck._licensePlate}
       <span>Type of gas:</span> ${truck._typeOfGas}
-    `);
-  
-    this.transportList.appendChild(li)
+    `,
+    );
+
+    this.transportList.appendChild(li);
 
     const transportList = this.transportList.innerHTML;
 
-    localStorageService.saveToken(TRANSPORT_TOKEN, transportList)
+    localStorageService.saveToken(TRANSPORT_TOKEN, transportList);
   }
 
   render() {
     this.transportList.innerHTML = '';
 
-    if(localStorageService.init(TRANSPORT_TOKEN)) {
+    if (localStorageService.init(TRANSPORT_TOKEN)) {
+      localStorageService.saveToken(TRANSPORT_TOKEN, null);
 
-      localStorageService.saveToken(TRANSPORT_TOKEN, null)
-
-      console.log(`local storage for ${TRANSPORT_TOKEN} is initialized`)
+      console.log(`local storage for ${TRANSPORT_TOKEN} is initialized`);
     }
 
-      this.transportList.innerHTML = localStorageService.getToken(TRANSPORT_TOKEN);
-
-    }
-
+    this.transportList.innerHTML = localStorageService.getToken(TRANSPORT_TOKEN);
+  }
 }

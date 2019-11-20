@@ -7,27 +7,25 @@ export const DEFAULT_SHIP = {
   producedYear: '2019',
   capacity: '200000',
   averageSpeed: '20',
-  countOfTeam: '83'
+  countOfTeam: '83',
 };
-
 
 export default class Ship extends Transport {
   constructor(
-     id = DEFAULT_SHIP.id,
-     model = DEFAULT_SHIP.model, 
-     name = DEFAULT_SHIP.name, 
-     producedYear = DEFAULT_SHIP.producedYear, 
-     capacity = DEFAULT_SHIP.capacity, 
-     averageSpeed = DEFAULT_SHIP.averageSpeed, 
-     countOfTeam = DEFAULT_SHIP.countOfTeam
-     ) {
-    super(id, model ,producedYear, capacity, averageSpeed)
+    id = DEFAULT_SHIP.id,
+    model = DEFAULT_SHIP.model,
+    name = DEFAULT_SHIP.name,
+    producedYear = DEFAULT_SHIP.producedYear,
+    capacity = DEFAULT_SHIP.capacity,
+    averageSpeed = DEFAULT_SHIP.averageSpeed,
+    countOfTeam = DEFAULT_SHIP.countOfTeam,
+  ) {
+    super(id, model, producedYear, capacity, averageSpeed);
     this._countOfTeam = countOfTeam;
     this._name = name;
-
   }
 
   showAverageSpeed() {
-    return `${this._averageSpeed} nm`
+    return `${this._averageSpeed} nm`;
   }
 }

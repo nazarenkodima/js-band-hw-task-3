@@ -3,5 +3,3 @@ import CostList from './models/CostList.js';
 
 const transportList = new TransportList();
 const costList = new CostList();
-
-
